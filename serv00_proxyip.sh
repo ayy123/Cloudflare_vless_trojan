@@ -320,6 +320,11 @@ openssl req -new -x509 -days 3650 -key "private.key" -out "cert.pem" -subj "/CN=
         "uuid": "$UUID"
       }
     ],
+    "tls": {
+      "enabled": true,
+      "certificate_path": "cert.pem",
+      "key_path": "private.key"
+    },
     "transport": {
       "type": "ws",
       "path": "$UUID-vm",
