@@ -430,9 +430,10 @@ else
 sed -i '' -e '19s|111|'"$ARGO_DOMAIN"'|' serv00keep.sh
 sed -i '' -e '20s|999|'"$ARGO_AUTH"'|' serv00keep.sh
 fi
-if ! crontab -l 2>/dev/null | grep -q 'serv00keep'; then
+:
+'if ! crontab -l 2>/dev/null | grep -q 'serv00keep'; then
 (crontab -l 2>/dev/null; echo "*/2 * * * * if ! ps aux | grep '[c]onfig' > /dev/null; then /bin/bash ${WORKDIR}/serv00keep.sh; fi") | crontab -
-fi
+fi'
 green "进程保活安装完毕，默认每2秒执行一次，运行 crontab -e 可自行修改cron定时时间" && sleep 2
 ISP=$(curl -s --max-time 5 https://speed.cloudflare.com/meta | awk -F\" '{print $26}' | sed -e 's/ /_/g' || echo "0")
 get_name() { if [ "$HOSTNAME" = "s1.ct8.pl" ]; then SERVER="CT8"; else SERVER=$(echo "$HOSTNAME" | cut -d '.' -f 1); fi; echo "$SERVER"; }
@@ -983,7 +984,7 @@ rules:
   
 EOF
 sleep 2
-rm -rf boot.log config.json sb.log core tunnel.yml tunnel.json fake_useragent_0.2.0.json
+#rm -rf boot.log config.json sb.log core tunnel.yml tunnel.json fake_useragent_0.2.0.json
 }
 
 showlist(){
